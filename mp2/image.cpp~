@@ -1,0 +1,16 @@
+#include <image.hpp>
+#include <iostream>
+
+void Image::flipleft ()
+{
+    for(int i = 0; i < PNG::width(); i++)
+    {
+        for(int j = 0; j < PNG::height(); j++)
+        {
+            RGBAPixel temp = PNG::operator()(width-i,j);
+            *PNG::operator()(i,j) = *temp;
+        }
+    }
+}
+void Image::adjustbrightness (int r, int g, int b);
+void Image::invertcolors ();

@@ -10,10 +10,14 @@
  *   Date: 02 Feb 2007
  */
 
-#include "image.h"
+#include "image.hpp"
 
 int main()
 {
+    // Image test = Image();
+    // test.readFromFile("test.png");
+    // test.flipleft();
+   
 	Image* myImage = new Image();
 	myImage->readFromFile("in_01.png");
 	myImage->invertcolors();
@@ -29,4 +33,5 @@ int main()
 	
 	return 0;
 }
+
 

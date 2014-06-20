@@ -1,0 +1,22 @@
+FLAGS = -g -O0 -Wall
+
+all: testimage
+
+testimage: main.o rgbapixel.o png.o image.o
+	g++ $(FlAGS) main.o png.o rgbapixel.o image.o -lpng -o testimage
+
+main.o: main.cpp
+	g++ $(FlAGS) -c main.cpp
+
+rgbapixel.o: rgbapixel.cpp
+	g++ $(FlAGS) -c rgbapixel.cpp
+
+png.o: png.cpp
+	g++ $(FlAGS) -c png.cpp -lpng
+
+image.o: image.cpp
+	g++ $(FlAGS) -c image.cpp
+
+clean:
+	rm -rf *o testimage
+
