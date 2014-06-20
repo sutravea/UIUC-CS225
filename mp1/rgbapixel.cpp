@@ -1,4 +1,4 @@
-#include <rgbapixel.h>
+#include "rgbapixel.h"
 
 RGBAPixel::RGBAPixel()
 {
@@ -10,7 +10,7 @@ RGBAPixel::RGBAPixel()
 
 RGBAPixel::RGBAPixel (unsigned char red, unsigned char green, unsigned char blue)
 {
-  self.red = red;
-  self.green = green;
-  self.blue = blue;
+  RGBAPixel::red = red;
+  RGBAPixel::green = green;
+  RGBAPixel::blue = blue;
 }
