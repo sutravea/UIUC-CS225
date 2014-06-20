@@ -10,8 +10,8 @@
  *   Date: 02 Feb 2007
  */
 		  	
-#include "image.h"
-#include "scene.h"
+#include "image.hpp"
+#include "scene.hpp"
 
 int main()
 {
