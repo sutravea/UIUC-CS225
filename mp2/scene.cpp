@@ -63,17 +63,17 @@ void Scene::changelayer (int index, int newindex){
         cout << "invalid index" <<endl;
         return;
     }
-    if(index >= max || index < 0)
+    if(newindex >= max || newindex < 0)
     {
         cout << "invalid index" <<endl;
         return;
     }
 
-    if((index = newindex))
+    if(index == newindex)
         return;
     
     if(sceneVector[newindex] != NULL)
-        sceneVector[newindex] = NULL;
+        delete sceneVector[newindex];
 
     sceneVector[newindex] = sceneVector[index];
     sceneVector[index] = NULL;

@@ -22,9 +22,9 @@ int main()
 	Image result = set->drawscene();
 	result.writeToFile("scene.png");	
 
-	// set->changelayer(1, 3);
-	// result = set->drawscene();
-	// result.writeToFile("scene2.png");
+	set->changelayer(1, 3);
+	result = set->drawscene();
+	result.writeToFile("scene2.png");
 
 	// set->translate(0, 50, 50);
 	// result = set->drawscene();
