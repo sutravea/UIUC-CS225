@@ -1,6 +1,5 @@
 #include "scene.hpp"
 
-
 Scene::Scene (int max){
     sceneVector = vector<Image*>(max);
     for(auto& it : sceneVector)
