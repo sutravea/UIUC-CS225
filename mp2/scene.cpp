@@ -11,12 +11,19 @@ Scene::Scene (int max){
     this->max = max;
 }
 
-Scene::~Scene (){
+Scene::~Scene () {
+    for (auto& it : sceneVector) {
+        if (it != NULL) {
+            delete it;
+        }
+    }
 }
+
 Scene::Scene (const Scene &source){}
 const Scene& Scene::operator=(const Scene &source){
     return *this;
 }
+
 void Scene::changemaxlayers (int newmax){
     if(newmax<max)
     {
@@ -50,6 +57,7 @@ void Scene::addpicture (const char *FileName, int index, int x, int y){
 
     coordVector[index] = make_pair(x,y);
 }
+
 void Scene::changelayer (int index, int newindex){
     if(index >= max || index < 0)
     {
@@ -71,6 +79,7 @@ void Scene::changelayer (int index, int newindex){
     sceneVector[newindex] = sceneVector[index];
     sceneVector[index] = NULL;
 }
+
 void Scene::translate (int index, int xcoord, int ycoord){
     if((sceneVector[index] = NULL))
     {
@@ -80,9 +89,11 @@ void Scene::translate (int index, int xcoord, int ycoord){
     
     coordVector[index] = make_pair(xcoord, ycoord);
 }
+
 void Scene::deletepicture (int index){
     
 }
+
 Image * Scene::getpicture (int index) const{
     if(index>=max)
     {
@@ -92,6 +103,7 @@ Image * Scene::getpicture (int index) const{
 
     return sceneVector[index];
 }
+
 Image Scene::drawscene () const{
     unsigned int minw = 0;
     unsigned int minh = 0;
