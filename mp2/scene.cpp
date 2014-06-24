@@ -10,6 +10,7 @@ Scene::Scene (int max){
     coordVector = vector<pair<int,int>>(max);
     this->max = max;
 }
+
 Scene::~Scene (){
 }
 Scene::Scene (const Scene &source){}
@@ -91,4 +92,36 @@ Image * Scene::getpicture (int index) const{
 
     return sceneVector[index];
 }
-Image Scene::drawscene () const{return Image();}
+Image Scene::drawscene () const{
+    unsigned int minw = 0;
+    unsigned int minh = 0;
+    Image scene = Image();
+    for(int i = 0; i < max; i++)
+    {
+        if (sceneVector[i] != NULL)
+        {
+            if((sceneVector[i]->width()+coordVector[i].first) > minw)
+                minw = sceneVector[i]->width();
+            if((sceneVector[i]->height()+coordVector[i].second) > minh)
+                minh = sceneVector[i]->height();
+        }
+    }
+    scene.resize(minw, minh);
+    
+    for(int i = 0; i < max; i++)
+    {
+        if(sceneVector[i] !=NULL)
+        {
+            for(unsigned int w = 0; w < sceneVector[i]->width(); w++)
+            {
+                for(unsigned int h = 0; h < sceneVector[i]->height(); h++)
+                {
+                    *scene(coordVector[i].first+w,coordVector[i].second+h) = *(*sceneVector[i]) (w,h);
+                }
+            
+            }
+        }
+    }
+
+    return scene;
+}

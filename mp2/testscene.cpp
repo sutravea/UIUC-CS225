@@ -22,36 +22,36 @@ int main()
 	Image result = set->drawscene();
 	result.writeToFile("scene.png");	
 
-	set->changelayer(1, 3);
-	result = set->drawscene();
-	result.writeToFile("scene2.png");
+	// set->changelayer(1, 3);
+	// result = set->drawscene();
+	// result.writeToFile("scene2.png");
 
-	set->translate(0, 50, 50);
-	result = set->drawscene();
-	result.writeToFile("scene3.png");
+	// set->translate(0, 50, 50);
+	// result = set->drawscene();
+	// result.writeToFile("scene3.png");
 
-	set->getpicture(0)->adjustbrightness(-70,-70,-70);
-	result = set->drawscene();
-	result.writeToFile("scene4.png");
+	// set->getpicture(0)->adjustbrightness(-70,-70,-70);
+	// result = set->drawscene();
+	// result.writeToFile("scene4.png");
 
-	set->deletepicture(3);
-	result = set->drawscene();
-	result.writeToFile("scene5.png");
+	// set->deletepicture(3);
+	// result = set->drawscene();
+	// result.writeToFile("scene5.png");
 
-	Scene* sc = new Scene(*set);
-	sc->getpicture(0)->flipleft();
-	result = set->drawscene();
-	result.writeToFile("scene6.png");  //scene 5 and scene 6 should be the same
-	result = sc->drawscene();
-	result.writeToFile("scene7.png");
+	// Scene* sc = new Scene(*set);
+	// sc->getpicture(0)->flipleft();
+	// result = set->drawscene();
+	// result.writeToFile("scene6.png");  //scene 5 and scene 6 should be the same
+	// result = sc->drawscene();
+	// result.writeToFile("scene7.png");
 
+	// delete set;
+	// set = new Scene(5);
+	// *set = *sc;
+	// result = set->drawscene();
+	// result.writeToFile("scene8.png");   //scene7 and scene8 should be the same.
 	delete set;
-	set = new Scene(5);
-	*set = *sc;
-	result = set->drawscene();
-	result.writeToFile("scene8.png");   //scene7 and scene8 should be the same.
-	delete set;
-	delete sc;
+	// delete sc;
 
 	return 0;
 }
