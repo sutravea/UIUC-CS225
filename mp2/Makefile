@@ -1,4 +1,4 @@
-FLAGS = -g -O0 -Wall
+FLAGS = -g -O0 -Wall -std=c++11
 
 all: testimage testscene
 

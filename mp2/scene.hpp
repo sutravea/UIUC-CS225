@@ -1,10 +1,15 @@
 #include "image.hpp"
 #include <vector>
+#include <utility>
+
+using namespace std;
+
 class Scene {
 public:
     Scene (int max);
     ~Scene ();
     Scene (const Scene &source);
+    const Scene& operator=(const Scene &source);
     void changemaxlayers (int newmax);
     void addpicture (const char *FileName, int index, int x, int y);
     void changelayer (int index, int newindex);
@@ -13,6 +18,7 @@ public:
     Image * getpicture (int index) const;
     Image drawscene () const;
 private:
-    std::vector<Image*> sceneVector;
+    vector<Image*> sceneVector;
+    vector<pair<int,int>> coordVector;
+    int max;
 };
- 
