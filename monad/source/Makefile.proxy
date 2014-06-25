@@ -1,0 +1,56 @@
+# Only define the compiler if it hasn't been defined already (i.e. a test's
+# Makefile has already specified it).
+ifndef CXX
+CXX = g++
+endif
+WARNINGS := -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef
+CFLAGS += $(WARNINGS)
+TESTEXE := proxy
+# This order is necessary for security. Always include student code last!
+# TODO (toole1): I wish I knew why this was; doing unit_tests first is slow if the student code doesn't compile
+TESTOBJS := $(TESTEXE).o util.o unit_tests.o monad_shared.o $(TESTOBJS)
+OPTIMIZE := off
+
+ifeq ($(strip $(OPTIMIZE)),on)
+CFLAGS += -O2 -DOPTIMIZE
+else ifeq ($(strip $(OPTIMIZE)),off)
+CFLAGS += -g -O0
+else
+$(warning Invalid value specified for OPTIMIZE. Should be on or off)
+CFLAGS += -g -O0
+endif
+
+ifndef ALL_TARGET
+ALL_TARGET = all
+all: $(TESTEXE)
+endif
+
+ifndef LIBS
+LIBS :=
+endif
+
+# Using temp instead of /dev/null to work on cygwin
+IS_LIBRT:=$(shell echo "int main(){}" | g++ -o temp -x c++ - -lrt &>/dev/null ; echo $$? ; rm -f temp)
+IS_LIBPNG:=$(shell echo "int main(){}" | g++ -o temp -x c++ - -lpng &>/dev/null ; echo $$? ; rm -f temp)
+ifeq ($(IS_LIBRT),0)
+LIBS+= -lrt
+endif
+ifeq ($(IS_LIBPNG),0)
+LIBS+= -lpng 
+endif
+
+$(TESTEXE): $(TESTOBJS)
+	$(CXX) $(TESTOBJS) $(LIBS) -o $@
+
+unit_tests.o : unit_tests.cpp $(wildcard *.h)
+	../source/cc-monad $(CXX) $(CFLAGS) -c $(@:.o=.cpp) -o $@
+
+%.o : %.cpp $(wildcard *.h)
+	$(CXX) $(CFLAGS) -c $(@:.o=.cpp) -o $@
+
+ifndef CLEAN_TARGET
+CLEAN_TARGET = clean
+.PHONY: clean
+clean:
+	-rm -f *.o $(TESTEXE)
+endif

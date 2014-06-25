@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# get the monad directory
+# source:
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ] ; do
+	LAST_SOURCE="$SOURCE";
+	SOURCE="$(readlink "$SOURCE")";
+	if [ "${SOURCE:0:1}" != / ] ; then
+		SOURCE="$(dirname "$LAST_SOURCE")/$SOURCE";
+	fi;
+done
+MONAD_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+SOURCE_DIR="$MONAD_DIR/source"
+CALLING_DIR=`pwd`
+
+svn cleanup "$MONAD_DIR"
+svn revert "$MONAD_DIR/.monadid" -q
+svn up "$MONAD_DIR" -q --accept theirs-full
+make -C "$SOURCE_DIR" -q
+if [ "$?" -ne 0 ]; then
+	make -C "$SOURCE_DIR" --quiet
+fi
+"$SOURCE_DIR/pure-monad" $@
