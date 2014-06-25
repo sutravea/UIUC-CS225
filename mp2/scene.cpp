@@ -55,29 +55,38 @@ const Scene& Scene::operator=(const Scene &source){
 }
 
 void Scene::changemaxlayers (int newmax){
+    if (newmax<0)
+    {
+        cout<<"invalid newmax"<<endl;
+        return;
+    }
+
     if(newmax<max)
     {
         for(int i = newmax; i < max; i++)
         {
-            if((sceneVector[i] = NULL))
+            if (sceneVector[i] != NULL)
             {
                 cout<<"invalid newmax"<<endl;
+                return;
             }
         }
+        sceneVector.resize(newmax);
+        coordVector.resize(newmax);
     }
-    vector<Image*> modifiedSceneVector = vector<Image*>(newmax);
 
-    for(int i = 0; i < max; i++)
+    else
     {
-        modifiedSceneVector[i] = sceneVector[i];
+        sceneVector.resize(newmax, NULL);
+        coordVector.resize(newmax);
     }
-    for(int i = max; i < newmax; i++)
-    {
-        modifiedSceneVector[i] = NULL;
-    }
+
+    max = newmax;
+
 }
+
 void Scene::addpicture (const char *FileName, int index, int x, int y){
-    if(index>=max)
+    if(index>=max || index < 0)
     {
         cout<<"index out of bounds"<<endl;
     }
@@ -85,7 +94,6 @@ void Scene::addpicture (const char *FileName, int index, int x, int y){
     Image* newImage = new Image();
     newImage->readFromFile(FileName);
     sceneVector[index] = newImage;
-
     coordVector[index] = make_pair(x,y);
 }
 
