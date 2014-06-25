@@ -18,6 +18,9 @@ public:
     Image * getpicture (int index) const;
     Image drawscene () const;
 private:
+    void _clear();
+    void _copy(const Scene &source);
+
     vector<Image*> sceneVector;
     vector<pair<int,int>> coordVector;
     int max;

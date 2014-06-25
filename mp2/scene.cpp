@@ -11,15 +11,46 @@ Scene::Scene (int max){
 }
 
 Scene::~Scene () {
+    _clear();
+}
+void Scene::_clear () {
     for (auto& it : sceneVector) {
         if (it != NULL) {
             delete it;
         }
+        it = NULL;
     }
 }
 
-Scene::Scene (const Scene &source){}
+Scene::Scene (const Scene& source){
+    if (this != &source)
+    {
+        _clear();
+        _copy(source);
+     }
+}
+
+void Scene:: _copy(const Scene &source){
+    max = source.max;
+    sceneVector = vector<Image*>(max);
+    coordVector = vector<pair<int,int>>(max);
+
+    for(int i = 0; i < max; i++)
+    {
+        if (source.sceneVector[i] != NULL)
+        {
+            sceneVector[i] = new Image(*(source.sceneVector[i]));
+            coordVector[i] = make_pair(source.coordVector[i].first,source.coordVector[i].second);
+        }
+    }
+
+}
+
 const Scene& Scene::operator=(const Scene &source){
+    if (this != &source){
+        _clear();
+        _copy(source);
+    }
     return *this;
 }
 
@@ -35,6 +66,7 @@ void Scene::changemaxlayers (int newmax){
         }
     }
     vector<Image*> modifiedSceneVector = vector<Image*>(newmax);
+
     for(int i = 0; i < max; i++)
     {
         modifiedSceneVector[i] = sceneVector[i];
@@ -74,27 +106,35 @@ void Scene::changelayer (int index, int newindex){
     
     if(sceneVector[newindex] != NULL)
         delete sceneVector[newindex];
-
+    
     sceneVector[newindex] = sceneVector[index];
+    coordVector[newindex] = coordVector[index];
     sceneVector[index] = NULL;
+    coordVector[index] = make_pair(0,0);
 }
 
 void Scene::translate (int index, int xcoord, int ycoord){
-    if((sceneVector[index] = NULL))
+    if (sceneVector[index] == NULL || index < 0 || index >= max) {
+        cout<<"invalid index"<<endl;
+        return;
+    }
+
+    coordVector[index] = make_pair(xcoord, ycoord);
+}
+
+void Scene::deletepicture (int index){
+    if(index>=max || index < 0 || sceneVector[index] == NULL)
     {
         cout<<"invalid index"<<endl;
         return;
     }
     
-    coordVector[index] = make_pair(xcoord, ycoord);
-}
-
-void Scene::deletepicture (int index){
-    
+    delete sceneVector[index];
+    sceneVector[index] = NULL;
 }
 
 Image * Scene::getpicture (int index) const{
-    if(index>=max)
+    if(index>=max || index < 0)
     {
         cout<<"invalid index"<<endl;
         return NULL;
@@ -112,9 +152,9 @@ Image Scene::drawscene () const{
         if (sceneVector[i] != NULL)
         {
             if((sceneVector[i]->width()+coordVector[i].first) > minw)
-                minw = sceneVector[i]->width();
+                minw = sceneVector[i]->width() + coordVector[i].first;
             if((sceneVector[i]->height()+coordVector[i].second) > minh)
-                minh = sceneVector[i]->height();
+                minh = sceneVector[i]->height() + coordVector[i].second;
         }
     }
     scene.resize(minw, minh);
