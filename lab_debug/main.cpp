@@ -10,8 +10,8 @@ RGBAPixel * myFavoriteColor(int intensity);
 int main()
 {
     // Load in.png
-    PNG origPNG = PNG("in.png");
-    PNG * original = &origPNG;
+
+    PNG * original = new PNG("in.png");
 
 //    original->readFromFile("in.png");
 
@@ -32,17 +32,17 @@ int main()
         for (int x = 1; 0 < x && x < width; x++)
         {
             // Calculate the pixel difference
-//            RGBAPixel * prev = (*original)(x-1, y-1);
-//            RGBAPixel * curr = (*original)(x  , y  );
-            // int diff = abs(curr->red   - prev->red  ) +
-            //     abs(curr->green - prev->green) +
-            //             abs(curr->blue  - prev->blue );
+            RGBAPixel * prev = (*original)(x-1, y-1);
+            RGBAPixel * curr = (*original)(x  , y  );
+            int diff = abs(curr->red   - prev->red  ) +
+                abs(curr->green - prev->green) +
+                abs(curr->blue  - prev->blue );
 
-            // // If the pixel is an edge pixel,
-            // // color the output pixel with my favorite color
-            // RGBAPixel * currOutPixel = (*output)(x,y);
-            // if (diff > 100)
-            //     currOutPixel = myPixel;
+            // If the pixel is an edge pixel,
+            // color the output pixel with my favorite color
+            RGBAPixel * currOutPixel = (*output)(x,y);
+            if (diff > 100)
+                *currOutPixel = *myPixel;
         }
     }
     cout << "reached line "<< __LINE__<<endl;
@@ -71,9 +71,9 @@ PNG * setupOutput(int w, int h)
 // Returns my favorite color
 RGBAPixel * myFavoriteColor(int intensity)
 {
-    RGBAPixel color;
-    color.red   = 0;
-    color.green = intensity/2;
-    color.blue  = intensity;
-    return &color;
+    RGBAPixel * color = new RGBAPixel();
+    color->red   = 0;
+    color->green = intensity/2;
+    color->blue  = intensity;
+    return color;
 }
