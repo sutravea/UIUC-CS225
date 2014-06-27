@@ -42,6 +42,26 @@ class Allocator
          */
         void printRooms();
 
+        /**
+         * Allocator copy constructor.
+         * @param other The Allocator to copy into this room.
+         */
+        Allocator(const Allocator & other); // BUG shallow copy if cctor is removed
+
+        /**
+         * Allocator assignment operator.
+         * @param other The Allocator to make a copy of
+         * @return A reference to the copied Allocator
+         */
+        Allocator & operator=(const Allocator & other);
+
+        /**
+         * Allocator destructor.
+         */
+        ~Allocator();
+
+
+
 	private:
 
         /**
@@ -92,6 +112,10 @@ class Allocator
 
         /** Total number of available seats across all rooms */
         int totalCapacity;
+        
+        void copy(const Allocator& other);
+        void clear();
+        
 };
 
 #endif

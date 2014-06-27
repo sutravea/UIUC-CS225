@@ -153,4 +153,59 @@ Room * Allocator::largestOpening()
     return &rooms[index];
 }
 
-Room
+/**
+ * Allocator copy constructor
+ */
+Allocator::Allocator(const Allocator & other)
+{
+    copy(other);
+}
+
+/**
+ * Allocator assignment operator
+ */
+Allocator & Allocator::operator=(const Allocator & other)
+{
+    if (this != &other)
+    {
+        clear();
+        copy(other);
+    }
+    return *this;
+}
+
+/**
+ * Allocator destructor
+ */
+Allocator::~Allocator()
+{
+    clear();
+}
+
+/**
+ * Destructor/assignment operator clear helper function
+ */
+void Allocator::clear()
+{
+    if (rooms != NULL)
+        delete[] rooms;
+    if(alpha != NULL)
+        delete[] alpha;
+}
+
+/**p
+ * Cctor/assignment operator copy helper function
+ */
+void Allocator::copy(const Allocator & other)
+{
+    roomCount = other.roomCount;
+    studentCount = other.studentCount;
+    totalCapacity = other.totalCapacity;
+    alpha = new Letter[26];
+    rooms = new Room[roomCount];
+    for (int i = 0; i < 26; i++)
+        alpha[i] = other.alpha[i];
+    for (int i = 0; i < roomCount; i++)
+        rooms[i] = other.rooms[i];
+}
+

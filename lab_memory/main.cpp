@@ -21,6 +21,9 @@ int main()
 	Allocator theAllocator("students.txt", "rooms.txt");
 	theAllocator.allocate();
 	theAllocator.printRooms();
+        // Allocator test(theAllocator);
+        // test.allocate();
+        // test.printRooms();
 	fileio::halt();
 	cout << endl;
 	return 0;
