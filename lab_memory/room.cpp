@@ -14,9 +14,9 @@ Room::Room()
  * Creates an empty room with the given name and capacity
  */
 Room::Room(const string & init_name, int init_capacity)
-	: name(init_name), capacity(init_capacity), max_letters(26), count(0), letterCount(0)
+    : name(init_name), capacity(init_capacity), max_letters(26), count(0), letterCount(0)
 {
-	letters = new Letter[max_letters];
+    letters = new Letter[max_letters];
 }
 
 /**
@@ -24,7 +24,7 @@ Room::Room(const string & init_name, int init_capacity)
  */
 Room::Room(const Room & other)
 {
-	copy(other);
+    copy(other);
 }
 
 /**
@@ -32,12 +32,12 @@ Room::Room(const Room & other)
  */
 Room & Room::operator=(const Room & other)
 {
-	if (this != &other)
-	{
-		clear();
-		copy(other);
-	}
-	return *this;
+    if (this != &other)
+    {
+        clear();
+        copy(other);
+    }
+    return *this;
 }
 
 /**
@@ -45,16 +45,16 @@ Room & Room::operator=(const Room & other)
  */
 Room::~Room()
 {
-	clear();
+    clear();
 }
 
 /**
  * Allocates a letter group to this room
  */
 void Room::addLetter(const Letter & L)
-{
-	letters[letterCount++] = L;
-	count += L.count;
+{    
+    letters[letterCount++] = L;
+    count += L.count;
 }
 
 /**
@@ -63,7 +63,7 @@ void Room::addLetter(const Letter & L)
  */
 int Room::spaceRemaining()
 {
-	return capacity - count;
+    return capacity - count;
 }
 
 /**
@@ -71,10 +71,10 @@ int Room::spaceRemaining()
  */
 void Room::print()
 {
-	cout << name << " (" << count << "/" << capacity << "):";
-	for (int L = 0; L < letterCount; L++)
-		cout << " " << letters[L].letter;
-	cout << endl;
+    cout << name << " (" << count << "/" << capacity << "):";
+    for (int L = 0; L < letterCount; L++)
+        cout << " " << letters[L].letter;
+    cout << endl;
 }
 
 /**
@@ -82,8 +82,8 @@ void Room::print()
  */
 void Room::clear()
 {
-	if (letters != NULL)
-		delete letters;
+    if (letters != NULL)
+        delete[] letters;
 }
 
 /**
@@ -91,10 +91,13 @@ void Room::clear()
  */
 void Room::copy(const Room & other)
 {
-	name        = other.name;
-	capacity    = other.capacity;
-	count       = other.count;
-	letterCount = other.letterCount;
-	letters     = other.letters;
+    name        = other.name;
+    capacity    = other.capacity;
+    count       = other.count;
+    letterCount = other.letterCount;
+    max_letters = other.max_letters;
+    letters     = new Letter[max_letters];
+    for (int L = 0; L < max_letters; L++)
+        letters[L] = other.letters[L];
 }
 
