@@ -17,7 +17,7 @@
 template <class T>
 List<T>::~List()
 {
-    /// @todo Graded in MP3.1
+    clear(); 
 }
 
 /**
@@ -27,7 +27,18 @@ List<T>::~List()
 template <class T>
 void List<T>::clear()
 {
-    /// @todo Graded in MP3.1
+    // if we have things to delete
+    if (!empty())
+    {
+        ListNode * curr = head;
+        // iterate down the parameter list
+        while (curr != NULL)
+        {
+            curr = head->next;
+            delete head;
+            head = curr;
+        }
+    }
 }
 
 /**
@@ -39,7 +50,23 @@ void List<T>::clear()
 template <class T>
 void List<T>::insertFront(T const & ndata)
 {
-    /// @todo Graded in MP3.1
+    ListNode* nNode = new ListNode(ndata);
+    if(empty())
+    {
+        head = nNode;
+        tail = nNode;
+        nNode->prev = NULL;
+        nNode->next = NULL;
+        
+    }
+    else
+    {
+        head->prev = nNode;
+        nNode->next = head;
+        nNode->prev = NULL;
+        head = nNode;
+    }
+    length++;
 }
 
 /**
@@ -51,7 +78,22 @@ void List<T>::insertFront(T const & ndata)
 template <class T>
 void List<T>::insertBack( const T & ndata )
 {
-    /// @todo Graded in MP3.1
+    ListNode* nNode = new ListNode(ndata);
+    if(empty())
+    {
+        head = nNode;
+        tail = nNode;
+        nNode->prev = NULL;
+        nNode->next = NULL;       
+    }
+    else
+    {
+        tail->next = nNode;
+        nNode->prev = tail;
+        nNode->next = NULL;
+        tail = nNode;
+    }
+    length++;
 }
 
 
@@ -78,9 +120,44 @@ void List<T>::reverse()
 template <class T>
 void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
 {
-    /// @todo Graded in MP3.1
-}
+    if (!empty()) 
+    {
+        ListNode * original = endPoint;
+        ListNode * prevNode;
+        // ListNode * next = endPoint->next;
+ 
+        while (original != startPoint->prev)
+        {
+            ListNode * node = new ListNode(original->data);
 
+            if (original == endPoint)
+            {
+                std::cout << "reached line " << __LINE__ << std::endl;
+                node->prev = startPoint->prev;
+                if (startPoint->prev != NULL)
+                    startPoint->prev->next = node;
+                else
+                    head = node;
+            }
+            else
+                
+            // // else
+            // // {
+            // //     node->prev = prev;
+            // // }
+            // // if (original == startPoint)
+            // //     node->next = endPoint->next;
+            // // else
+            // // {
+            // //     node->next = next;
+            // // }
+            std::cout << original->data << std::endl;
+            original = original->prev;
+            
+        }
+        
+    }
+}
 
 /**
  * Reverses blocks of size n in the current List. You should use your
