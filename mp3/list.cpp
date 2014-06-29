@@ -139,8 +139,16 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
                 else
                     head = node;
             }
+
             else
+            {
+                node->prev = prevNode;
+            }
                 
+            if (original == startPoint)
+            {
+                std::cout << "reached line " << __LINE__ << std::endl;
+            }
             // // else
             // // {
             // //     node->prev = prev;
@@ -151,9 +159,15 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
             // // {
             // //     node->next = next;
             // // }
-            std::cout << original->data << std::endl;
+            std::cout << "original: " << original->data << std::endl;
             original = original->prev;
-            
+            prevNode = node;
+            cout << prevNode ->data << endl;
+        }
+        while(prevNode != NULL)
+        {
+            cout << prevNode->data << " ";
+            prevNode = prevNode->prev;
         }
         
     }
