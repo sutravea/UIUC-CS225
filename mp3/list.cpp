@@ -103,7 +103,7 @@ void List<T>::insertBack( const T & ndata )
 template <class T>
 void List<T>::reverse()
 {
-    reverse(head, tail);
+    reverse(head, head->next);
 }
 
 /**
@@ -120,11 +120,13 @@ void List<T>::reverse()
 template <class T>
 void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
 {
+    if(startPoint == endPoint)
+        return;
     if (!empty()) 
     {
         ListNode * original = endPoint;
-        ListNode * prevNode;
-        // ListNode * next = endPoint->next;
+        ListNode * prevNode = NULL;
+        ListNode * endNext = endPoint->next;
  
         while (original != startPoint->prev)
         {
@@ -132,7 +134,6 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
 
             if (original == endPoint)
             {
-                std::cout << "reached line " << __LINE__ << std::endl;
                 node->prev = startPoint->prev;
                 if (startPoint->prev != NULL)
                     startPoint->prev->next = node;
@@ -144,30 +145,45 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
             {
                 node->prev = prevNode;
             }
-                
-            if (original == startPoint)
-            {
-                std::cout << "reached line " << __LINE__ << std::endl;
-            }
-            // // else
-            // // {
-            // //     node->prev = prev;
-            // // }
-            // // if (original == startPoint)
-            // //     node->next = endPoint->next;
-            // // else
-            // // {
-            // //     node->next = next;
-            // // }
-            std::cout << "original: " << original->data << std::endl;
+
+            if (prevNode != NULL)
+                prevNode->next = node;
+
+            ListNode * temp = original;
             original = original->prev;
+            if (temp != NULL && temp != endPoint)
+            {
+                delete temp;
+                temp = NULL;
+            }
             prevNode = node;
-            cout << prevNode ->data << endl;
         }
+
+        prevNode->next = endNext;        
+
+        if (endNext != NULL)
+        {
+            delete endNext->prev;
+            endNext->prev = prevNode;
+        }
+        
+        else
+            prevNode = tail;
+
+
         while(prevNode != NULL)
         {
             cout << prevNode->data << " ";
             prevNode = prevNode->prev;
+        }
+
+        cout << endl;
+
+        prevNode = head;
+        while(prevNode != NULL)
+        {
+            cout << prevNode->data << " ";
+            prevNode = prevNode->next;
         }
         
     }
