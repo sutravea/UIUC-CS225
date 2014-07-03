@@ -327,8 +327,13 @@ List<T> List<T>::split(int splitPoint)
 template <class T>
 typename List<T>::ListNode * List<T>::split(ListNode * start, int splitPoint)
 {
-    /// @todo Graded in MP3.2
-    return NULL; // change me!
+    for (int i = 0; i < splitPoint; i++)
+        start = start->next;
+    
+    start->prev->next = NULL;
+    start->prev = NULL;
+    
+    return start;
 }
 
 /**

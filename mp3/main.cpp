@@ -83,15 +83,15 @@ void testInserts()
 void testReverse()
 {
 	cout << "[main]: " << __func__ << "()" << endl;
-	// PNG in("in_02.png");
+	PNG in("in_02.png");
 
-	// List<RGBAPixel> list = imageToList(in);
-	// list.reverse();
+	List<RGBAPixel> list = imageToList(in);
+	list.reverse();
 
-	// PNG out = listToImage(list, in.width(), in.height());
-	// out.writeToFile("reverse.png");
+	PNG out = listToImage(list, in.width(), in.height());
+	out.writeToFile("reverse.png");
 
-	// checkSoln(__func__, out, "soln_reverse.png");
+	checkSoln(__func__, out, "soln_reverse.png");
 
         List<int> testList;
 
@@ -110,23 +110,23 @@ void testReverse()
 void testReverseNth()
 {
 	cout << "[main]: " << __func__ << "()" << endl;
-	// PNG in("in_03.png");
+	PNG in("in_03.png");
 	
-	// List<RGBAPixel> list = imageToList(in);
-	// list.reverseNth(in.height() * 20);
+	List<RGBAPixel> list = imageToList(in);
+	list.reverseNth(in.height() * 20);
 
-	// PNG out = listToImage(list, in.width(), in.height());
-	// out.writeToFile("reverseNth_01.png");
+	PNG out = listToImage(list, in.width(), in.height());
+	out.writeToFile("reverseNth_01.png");
 
-	// checkSoln(__func__, out, "soln_reverseNth_01.png");
+	checkSoln(__func__, out, "soln_reverseNth_01.png");
 
-	// in.readFromFile("in_04.png");
-	// list = imageToList(in);
-	// list.reverseNth(in.height() * 61);
-	// out = listToImage(list, in.width(), in.height());
-	// out.writeToFile("reverseNth_02.png");
+	in.readFromFile("in_04.png");
+	list = imageToList(in);
+	list.reverseNth(in.height() * 61);
+	out = listToImage(list, in.width(), in.height());
+	out.writeToFile("reverseNth_02.png");
 
-	// checkSoln(__func__, out, "soln_reverseNth_02.png");
+	checkSoln(__func__, out, "soln_reverseNth_02.png");
 
         List<int> testList;
 
@@ -181,53 +181,64 @@ void testSplit()
 {
 	cout << "[main]: " << __func__ << "()" << endl;
 
-	PNG in("in_07.png");
-	List<RGBAPixel> list1;
-	for (int i = 0; i < in.width(); i++)
-		for (int j = 0; j < in.height(); j++)
-			list1.insertBack(*in(i,j));
-	List<RGBAPixel> list2 = list1.split(400*240);
-	List<RGBAPixel> list3 = list2.split(400*240);
+        List<int> testList;
 
-	vector<RGBAPixel> im1vect(list1.begin(), list1.end());
-	vector<RGBAPixel> im2vect(list2.begin(), list2.end());
-	vector<RGBAPixel> im3vect(list3.begin(), list3.end());
+	for (int i = 1; i <= 7; i++)
+		testList.insertBack(i);
+        
+	cout << "original testList: " << testList << endl;
 
-	PNG out1(400,240);
-	int x = 0;
-	for (int i = 0; i < im1vect.size(); i++)
-	{
-		int y = i % 240;
-		*out1(x,y) = im1vect[i];
-		if (y == 239)
-			x++;
-	}
-	out1.writeToFile("split_01.png");
-	checkSoln(__func__, out1, "soln_split_01.png");
+        List<int> testList2 = testList.split(3);
 
-	PNG out2(400,240);
-	x = 0;
-	for (int i = 0; i < im2vect.size(); i++)
-	{
-		int y = i % 240;
-		*out2(x,y) = im2vect[i];
-		if (y == 239)
-			x++;
-	}
-	out2.writeToFile("split_02.png");
-	checkSoln(__func__, out2, "soln_split_02.png");
+        cout << "split testList: " << testList2 << endl;
 
-	PNG out3(400,240);
-	x = 0;
-	for (int i = 0; i < im3vect.size(); i++)
-	{
-		int y = i % 240;
-		*out3(x,y) = im3vect[i];
-		if (y == 239)
-			x++;
-	}
-	out3.writeToFile("split_03.png");
-	checkSoln(__func__, out3, "soln_split_03.png");
+	// PNG in("in_07.png");
+	// List<RGBAPixel> list1;
+	// for (int i = 0; i < in.width(); i++)
+	// 	for (int j = 0; j < in.height(); j++)
+	// 		list1.insertBack(*in(i,j));
+	// List<RGBAPixel> list2 = list1.split(400*240);
+	// List<RGBAPixel> list3 = list2.split(400*240);
+
+	// vector<RGBAPixel> im1vect(list1.begin(), list1.end());
+	// vector<RGBAPixel> im2vect(list2.begin(), list2.end());
+	// vector<RGBAPixel> im3vect(list3.begin(), list3.end());
+
+	// PNG out1(400,240);
+	// int x = 0;
+	// for (int i = 0; i < im1vect.size(); i++)
+	// {
+	// 	int y = i % 240;
+	// 	*out1(x,y) = im1vect[i];
+	// 	if (y == 239)
+	// 		x++;
+	// }
+	// out1.writeToFile("split_01.png");
+	// checkSoln(__func__, out1, "soln_split_01.png");
+
+	// PNG out2(400,240);
+	// x = 0;
+	// for (int i = 0; i < im2vect.size(); i++)
+	// {
+	// 	int y = i % 240;
+	// 	*out2(x,y) = im2vect[i];
+	// 	if (y == 239)
+	// 		x++;
+	// }
+	// out2.writeToFile("split_02.png");
+	// checkSoln(__func__, out2, "soln_split_02.png");
+
+	// PNG out3(400,240);
+	// x = 0;
+	// for (int i = 0; i < im3vect.size(); i++)
+	// {
+	// 	int y = i % 240;
+	// 	*out3(x,y) = im3vect[i];
+	// 	if (y == 239)
+	// 		x++;
+	// }
+	// out3.writeToFile("split_03.png");
+	// checkSoln(__func__, out3, "soln_split_03.png");
 }
 
 void testMerge()
