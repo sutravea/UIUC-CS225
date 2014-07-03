@@ -83,15 +83,15 @@ void testInserts()
 void testReverse()
 {
 	cout << "[main]: " << __func__ << "()" << endl;
-	PNG in("in_02.png");
+	// PNG in("in_02.png");
 
-	List<RGBAPixel> list = imageToList(in);
-	list.reverse();
+	// List<RGBAPixel> list = imageToList(in);
+	// list.reverse();
 
-	PNG out = listToImage(list, in.width(), in.height());
-	out.writeToFile("reverse.png");
+	// PNG out = listToImage(list, in.width(), in.height());
+	// out.writeToFile("reverse.png");
 
-	checkSoln(__func__, out, "soln_reverse.png");
+	// checkSoln(__func__, out, "soln_reverse.png");
 
         List<int> testList;
 
@@ -128,16 +128,16 @@ void testReverseNth()
 
 	// checkSoln(__func__, out, "soln_reverseNth_02.png");
 
-        // List<int> list;
+        List<int> testList;
 
-	// for (int i = 1; i <= 10; i++)
-	// 	list.insertBack(i);
+	for (int i = 1; i <= 2; i++)
+		testList.insertBack(i);
         
-	// cout << "original list: " << list << endl;
+	cout << "original testList: " << testList << endl;
         
-        // list.reverseNth(3);
+        testList.reverseNth(1);
         
-        // cout << "reversed list: " << list << endl;
+        cout << "reversed testList: " << testList << endl;
 
 }
 

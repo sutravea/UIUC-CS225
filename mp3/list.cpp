@@ -103,7 +103,8 @@ void List<T>::insertBack( const T & ndata )
 template <class T>
 void List<T>::reverse()
 {
-    reverse(head, tail);
+    ListNode * myend = head->next->next;
+    reverse(head, myend);
 }
 
 /**
@@ -136,6 +137,7 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
 
             if (original == myEndPoint)
             {
+                startPoint = node;
                 node->prev = startPrev;
                 if (startPrev != NULL)
                     startPrev->next = node;
@@ -161,8 +163,9 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
             prevNode = node;
         }
 
+        endPoint = prevNode;
         prevNode->next = endNext;        
-
+        
         if (endNext != NULL)
         {
             delete endNext->prev;
@@ -203,15 +206,22 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
 template <class T>
 void List<T>::reverseNth( int n )
 {
-    if(n >= length)
+    if (n >= length)
         reverse(head, tail);
+    if (n <= 0)
+        return;
+    if (empty())
+        return;
 
     ListNode * endPt = head;
     ListNode * startPt = endPt;
     for(int i = 0; i < length; i+= n)
     {
         if (i != 0)
+        {
             startPt = endPt->next;
+            endPt = startPt;
+        }
         for (int j = 1; j < n; j++)
         {
             if (endPt->next != NULL)
