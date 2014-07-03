@@ -245,7 +245,23 @@ void List<T>::reverseNth( int n )
 template <class T>
 void List<T>::waterfall()
 {
-    /// @todo Graded in MP3.1
+    // no.
+    ListNode * curr = head;
+    while (curr->next != tail)
+    {
+        ListNode * currNext = curr->next;
+        ListNode * currNextNext = currNext->next;
+
+        curr->next = currNextNext;
+        currNextNext->prev = curr;
+
+        tail->next = currNext;
+        currNext->prev = tail;
+        currNext->next = NULL;
+
+        tail = currNext;
+        curr = curr->next;
+    }
 }
 
 /**

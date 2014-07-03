@@ -162,6 +162,19 @@ void testWaterfall()
 	out.writeToFile("waterfall_02.png");
 
 	checkSoln(__func__, out, "soln_waterfall_02.png");
+        
+        List<int> testList;
+
+	for (int i = 1; i <= 7; i++)
+		testList.insertBack(i);
+        
+	cout << "original testList: " << testList << endl;
+        
+        testList.waterfall();
+        
+        cout << "waterfalled testList: " << testList << endl;
+
+
 }
 
 void testSplit()
