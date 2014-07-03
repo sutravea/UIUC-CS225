@@ -1,0 +1,541 @@
+Welcome to the Emacs shell
+
+~/CS225/UIUC-CS225/mp3 $ make && ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+1 2 3 4 5 6 7 8 9 10 
+segmentation fault (core dumped)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+make: Nothing to be done for `all'.
+==13573== Memcheck, a memory error detector
+==13573== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13573== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==13573== Command: ./mp3test reverse
+==13573== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+==13573== Invalid read of size 4
+==13573==    at 0x804DCFE: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:162)
+==13573==    by 0x804CDCB: List<int>::reverse() (list.cpp:106)
+==13573==    by 0x8049D87: testReverse() (main.cpp:103)
+==13573==    by 0x804C67D: main (main.cpp:333)
+==13573==  Address 0x438c330 is 0 bytes inside a block of size 12 free'd
+==13573==    at 0x402B838: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==13573==    by 0x804DCDA: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:156)
+==13573==    by 0x804CDCB: List<int>::reverse() (list.cpp:106)
+==13573==    by 0x8049D87: testReverse() (main.cpp:103)
+==13573==    by 0x804C67D: main (main.cpp:333)
+==13573== 
+==13573== Invalid free() / delete / delete[] / realloc()
+==13573==    at 0x402B838: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==13573==    by 0x804DD11: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:163)
+==13573==    by 0x804CDCB: List<int>::reverse() (list.cpp:106)
+==13573==    by 0x8049D87: testReverse() (main.cpp:103)
+==13573==    by 0x804C67D: main (main.cpp:333)
+==13573==  Address 0x438c330 is 0 bytes inside a block of size 12 free'd
+==13573==    at 0x402B838: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==13573==    by 0x804DCDA: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:156)
+==13573==    by 0x804CDCB: List<int>::reverse() (list.cpp:106)
+==13573==    by 0x8049D87: testReverse() (main.cpp:103)
+==13573==    by 0x804C67D: main (main.cpp:333)
+==13573== 
+1 2 3 4 5 6 7 8 9 10 
+10 9 8 7 6 5 4 3 2 1 reversed list: < 10 9 8 7 6 5 4 3 2 1 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==13573== 
+==13573== HEAP SUMMARY:
+==13573==     in use at exit: 0 bytes in 0 blocks
+==13573==   total heap usage: 518,521 allocs, 518,522 frees, 15,319,012 bytes allocated
+==13573== 
+==13573== All heap blocks were freed -- no leaks are possible
+==13573== 
+==13573== For counts of detected and suppressed errors, rerun with: -v
+==13573== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==13582== Memcheck, a memory error detector
+==13582== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13582== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==13582== Command: ./mp3test reverse
+==13582== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+1 2 3 4 5 6 7 8 9 10 
+10 9 8 7 6 5 4 3 2 1 reversed list: < 10 9 8 7 6 5 4 3 2 1 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==13582== 
+==13582== HEAP SUMMARY:
+==13582==     in use at exit: 0 bytes in 0 blocks
+==13582==   total heap usage: 518,521 allocs, 518,521 frees, 15,319,012 bytes allocated
+==13582== 
+==13582== All heap blocks were freed -- no leaks are possible
+==13582== 
+==13582== For counts of detected and suppressed errors, rerun with: -v
+==13582== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==13595== Memcheck, a memory error detector
+==13595== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13595== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==13595== Command: ./mp3test reverse
+==13595== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+2 3 4 5 6 7 8 9 10 1 
+1 10 9 8 7 6 5 4 3 2 reversed list: < 1 10 9 8 7 6 5 4 3 2 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==13595== 
+==13595== HEAP SUMMARY:
+==13595==     in use at exit: 0 bytes in 0 blocks
+==13595==   total heap usage: 518,520 allocs, 518,520 frees, 15,319,000 bytes allocated
+==13595== 
+==13595== All heap blocks were freed -- no leaks are possible
+==13595== 
+==13595== For counts of detected and suppressed errors, rerun with: -v
+==13595== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==13604== Memcheck, a memory error detector
+==13604== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13604== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==13604== Command: ./mp3test reverse
+==13604== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+10 2 3 4 5 6 7 8 9 1 
+1 9 8 7 6 5 4 3 2 10 reversed list: < 1 9 8 7 6 5 4 3 2 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==13604== 
+==13604== HEAP SUMMARY:
+==13604==     in use at exit: 0 bytes in 0 blocks
+==13604==   total heap usage: 518,519 allocs, 518,519 frees, 15,318,988 bytes allocated
+==13604== 
+==13604== All heap blocks were freed -- no leaks are possible
+==13604== 
+==13604== For counts of detected and suppressed errors, rerun with: -v
+==13604== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==13613== Memcheck, a memory error detector
+==13613== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13613== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==13613== Command: ./mp3test reverse
+==13613== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+10 1 2 3 4 5 6 7 8 9 
+9 8 7 6 5 4 3 2 1 10 reversed list: < 9 8 7 6 5 4 3 2 1 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==13613== 
+==13613== HEAP SUMMARY:
+==13613==     in use at exit: 0 bytes in 0 blocks
+==13613==   total heap usage: 518,520 allocs, 518,520 frees, 15,319,000 bytes allocated
+==13613== 
+==13613== All heap blocks were freed -- no leaks are possible
+==13613== 
+==13613== For counts of detected and suppressed errors, rerun with: -v
+==13613== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==13623== Memcheck, a memory error detector
+==13623== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13623== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==13623== Command: ./mp3test reverse
+==13623== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+reversed list: < 1 2 3 4 5 6 7 8 9 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==13623== 
+==13623== HEAP SUMMARY:
+==13623==     in use at exit: 0 bytes in 0 blocks
+==13623==   total heap usage: 518,511 allocs, 518,511 frees, 15,318,892 bytes allocated
+==13623== 
+==13623== All heap blocks were freed -- no leaks are possible
+==13623== 
+==13623== For counts of detected and suppressed errors, rerun with: -v
+==13623== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==13632== Memcheck, a memory error detector
+==13632== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13632== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==13632== Command: ./mp3test reverse
+==13632== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+==13632== Invalid read of size 4
+==13632==    at 0x804DCFE: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:162)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632==  Address 0x438c0f0 is 0 bytes inside a block of size 12 free'd
+==13632==    at 0x402B838: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==13632==    by 0x804DCDC: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:156)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632== 
+==13632== Invalid read of size 4
+==13632==    at 0x804DD0A: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:163)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632==  Address 0x438c0f0 is 0 bytes inside a block of size 12 free'd
+==13632==    at 0x402B838: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==13632==    by 0x804DCDC: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:156)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632== 
+==13632== Invalid write of size 4
+==13632==    at 0x804DD1A: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:165)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632==  Address 0x438c0f0 is 0 bytes inside a block of size 12 free'd
+==13632==    at 0x402B838: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==13632==    by 0x804DCDC: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:156)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632== 
+==13632== Invalid read of size 4
+==13632==    at 0x804DD2A: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:170)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632==  Address 0x438c138 is 8 bytes inside a block of size 12 free'd
+==13632==    at 0x402B838: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==13632==    by 0x804DD13: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:163)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632== 
+==13632== Invalid read of size 4
+==13632==    at 0x804DD50: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:171)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632==  Address 0x438c134 is 4 bytes inside a block of size 12 free'd
+==13632==    at 0x402B838: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==13632==    by 0x804DD13: List<int>::reverse(List<int>::ListNode*&, List<int>::ListNode*&) (list.cpp:163)
+==13632==    by 0x804CDCC: List<int>::reverse() (list.cpp:106)
+==13632==    by 0x8049D87: testReverse() (main.cpp:103)
+==13632==    by 0x804C67D: main (main.cpp:333)
+==13632== 
+10 9 8 7 6 5 4 3 2 1 
+2 1 3 4 5 6 7 8 9 10 reversed list: < 2 1 3 4 5 6 7 8 9 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==13632== 
+==13632== HEAP SUMMARY:
+==13632==     in use at exit: 0 bytes in 0 blocks
+==13632==   total heap usage: 518,513 allocs, 518,513 frees, 15,318,916 bytes allocated
+==13632== 
+==13632== All heap blocks were freed -- no leaks are possible
+==13632== 
+==13632== For counts of detected and suppressed errors, rerun with: -v
+==13632== ERROR SUMMARY: 7 errors from 5 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==13661== Memcheck, a memory error detector
+==13661== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==13661== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==13661== Command: ./mp3test reverse
+==13661== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+1 2 
+2 1 3 4 5 6 7 8 9 10 reversed list: < 2 1 3 4 5 6 7 8 9 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==13661== 
+==13661== HEAP SUMMARY:
+==13661==     in use at exit: 0 bytes in 0 blocks
+==13661==   total heap usage: 518,513 allocs, 518,513 frees, 15,318,916 bytes allocated
+==13661== 
+==13661== All heap blocks were freed -- no leaks are possible
+==13661== 
+==13661== For counts of detected and suppressed errors, rerun with: -v
+==13661== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ git add -A
+~/CS225/UIUC-CS225/mp3 $ git commit -m "lots of progress on reverse, but not complete. problem with head, head_next edge case and prev pointers"
+[master bace54b] lots of progress on reverse, but not complete. problem with head, head_next edge case and prev pointers
+ 5 files changed, 36 insertions(+), 20 deletions(-)
+ rewrite mp3/blockpng.o (97%)
+ rewrite mp3/main.o (80%)
+ rewrite mp3/mp3test (93%)
+ rewrite mp3/reverse.png (98%)
+~/CS225/UIUC-CS225/mp3 $ git push
+Counting objects: 13, done.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (7/7), 193.78 KiB | 0 bytes/s, done.
+Total 7 (delta 3), reused 0 (delta 0)
+To git@github.com:sutravea/UIUC-CS225.git
+   5ca05b7..bace54b  master -> master
+~/CS225/UIUC-CS225/mp3 $ git push
+Everything up-to-date
+~/CS225/UIUC-CS225/mp3 $ make
+make: Nothing to be done for `all'.
+~/CS225/UIUC-CS225/mp3 $ ./mp3test reverse
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+1 2 
+2 1 3 4 5 6 7 8 9 10 reversed list: < 2 1 3 4 5 6 7 8 9 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+~/CS225/UIUC-CS225/mp3 $ valgrind ./mp3test reverse
+==14897== Memcheck, a memory error detector
+==14897== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==14897== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==14897== Command: ./mp3test reverse
+==14897== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+1 2 
+2 1 3 4 5 6 7 8 9 10 reversed list: < 2 1 3 4 5 6 7 8 9 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==14897== 
+==14897== HEAP SUMMARY:
+==14897==     in use at exit: 0 bytes in 0 blocks
+==14897==   total heap usage: 518,513 allocs, 518,513 frees, 15,318,916 bytes allocated
+==14897== 
+==14897== All heap blocks were freed -- no leaks are possible
+==14897== 
+==14897== For counts of detected and suppressed errors, rerun with: -v
+==14897== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ valgrind ./mp3test reverse
+==14904== Memcheck, a memory error detector
+==14904== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==14904== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==14904== Command: ./mp3test reverse
+==14904== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+1 2 
+2 1 3 4 5 6 7 8 9 10 reversed list: < 2 1 3 4 5 6 7 8 9 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+==14904== 
+==14904== HEAP SUMMARY:
+==14904==     in use at exit: 4,147,285 bytes in 172,807 blocks
+==14904==   total heap usage: 518,500 allocs, 345,693 frees, 14,572,355 bytes allocated
+==14904== 
+==14904== LEAK SUMMARY:
+==14904==    definitely lost: 0 bytes in 0 blocks
+==14904==    indirectly lost: 0 bytes in 0 blocks
+==14904==      possibly lost: 77 bytes in 3 blocks
+==14904==    still reachable: 4,147,208 bytes in 172,804 blocks
+==14904==         suppressed: 0 bytes in 0 blocks
+==14904== Rerun with --leak-check=full to see details of leaked memory
+==14904== 
+==14904== For counts of detected and suppressed errors, rerun with: -v
+==14904== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+interrupt
+~/CS225/UIUC-CS225/mp3 $ make && valgrind ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==14912== Memcheck, a memory error detector
+==14912== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==14912== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==14912== Command: ./mp3test reverse
+==14912== 
+[main]: testReverse()
+original list: < 1 2 3 4 5 6 7 8 9 10 >
+10 9 8 7 6 5 4 3 1 2 
+2 2 2 2 2 2 2 2 2 2 reversed list: < 2 1 3 4 5 6 7 8 9 10 >
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==14912== 
+==14912== HEAP SUMMARY:
+==14912==     in use at exit: 0 bytes in 0 blocks
+==14912==   total heap usage: 518,513 allocs, 518,513 frees, 15,318,916 bytes allocated
+==14912== 
+==14912== All heap blocks were freed -- no leaks are possible
+==14912== 
+==14912== For counts of detected and suppressed errors, rerun with: -v
+==14912== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==14923== Memcheck, a memory error detector
+==14923== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==14923== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==14923== Command: ./mp3test reverse
+==14923== 
+[main]: testReverse()
+[testReverse]: Image does not match soln_reverse.png
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==14923== 
+==14923== HEAP SUMMARY:
+==14923==     in use at exit: 0 bytes in 0 blocks
+==14923==   total heap usage: 588,552 allocs, 588,552 frees, 18,233,808 bytes allocated
+==14923== 
+==14923== All heap blocks were freed -- no leaks are possible
+==14923== 
+==14923== For counts of detected and suppressed errors, rerun with: -v
+==14923== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ eog reverse.png soln_reverse.png
+~/CS225/UIUC-CS225/mp3 $ make && valgrind ./mp3test 
+make: Nothing to be done for `all'.
+==14941== Memcheck, a memory error detector
+==14941== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==14941== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==14941== Command: ./mp3test
+==14941== 
+[main]: testInserts()
+[testInserts]: < 10 9 8 7 6 5 4 3 2 1 >
+[testInserts]: size: 10
+[testInserts]: < 1 2 3 4 5 6 7 8 9 10 >
+[testInserts]: size: 10
+[main]: testReverse()
+[testReverse]: Image does not match soln_reverse.png
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+[main]: testWaterfall()
+[testWaterfall]: Image does not match soln_waterfall_01.png
+[testWaterfall]: Image does not match soln_waterfall_02.png
+[main]: testSplit()
+==14941== Invalid write of size 4
+==14941==    at 0x804DBD5: List<RGBAPixel>::copy(List<RGBAPixel> const&) (list_given.cpp:79)
+==14941==    by 0x804CCD7: List<RGBAPixel>::List(List<RGBAPixel> const&) (list_given.cpp:29)
+==14941==    by 0x804D110: List<RGBAPixel>::split(int) (list.cpp:264)
+==14941==    by 0x804AD02: testSplit() (main.cpp:162)
+==14941==    by 0x804C6A8: testMP32() (main.cpp:310)
+==14941==    by 0x804C74C: main (main.cpp:321)
+==14941==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==14941== 
+==14941== 
+==14941== Process terminating with default action of signal 11 (SIGSEGV)
+==14941==  Access not within mapped region at address 0x0
+==14941==    at 0x804DBD5: List<RGBAPixel>::copy(List<RGBAPixel> const&) (list_given.cpp:79)
+==14941==    by 0x804CCD7: List<RGBAPixel>::List(List<RGBAPixel> const&) (list_given.cpp:29)
+==14941==    by 0x804D110: List<RGBAPixel>::split(int) (list.cpp:264)
+==14941==    by 0x804AD02: testSplit() (main.cpp:162)
+==14941==    by 0x804C6A8: testMP32() (main.cpp:310)
+==14941==    by 0x804C74C: main (main.cpp:321)
+==14941==  If you believe this happened as a result of a stack
+==14941==  overflow in your program's main thread (unlikely but
+==14941==  possible), you can try to increase the size of the
+==14941==  main thread stack using the --main-stacksize= flag.
+==14941==  The main thread stack size used in this run was 8388608.
+==14941== 
+==14941== HEAP SUMMARY:
+==14941==     in use at exit: 4,608,026 bytes in 288,003 blocks
+==14941==   total heap usage: 1,107,080 allocs, 819,077 frees, 30,136,855 bytes allocated
+==14941== 
+==14941== LEAK SUMMARY:
+==14941==    definitely lost: 0 bytes in 0 blocks
+==14941==    indirectly lost: 0 bytes in 0 blocks
+==14941==      possibly lost: 22 bytes in 1 blocks
+==14941==    still reachable: 4,608,004 bytes in 288,002 blocks
+==14941==         suppressed: 0 bytes in 0 blocks
+==14941== Rerun with --leak-check=full to see details of leaked memory
+==14941== 
+==14941== For counts of detected and suppressed errors, rerun with: -v
+==14941== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+segmentation fault (core dumped)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+make: Nothing to be done for `all'.
+==14947== Memcheck, a memory error detector
+==14947== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==14947== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==14947== Command: ./mp3test reverse
+==14947== 
+[main]: testReverse()
+[testReverse]: Image does not match soln_reverse.png
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==14947== 
+==14947== HEAP SUMMARY:
+==14947==     in use at exit: 0 bytes in 0 blocks
+==14947==   total heap usage: 588,552 allocs, 588,552 frees, 18,233,808 bytes allocated
+==14947== 
+==14947== All heap blocks were freed -- no leaks are possible
+==14947== 
+==14947== For counts of detected and suppressed errors, rerun with: -v
+==14947== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test reverse
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==14959== Memcheck, a memory error detector
+==14959== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==14959== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==14959== Command: ./mp3test reverse
+==14959== 
+[main]: testReverse()
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+==14959== 
+==14959== HEAP SUMMARY:
+==14959==     in use at exit: 12 bytes in 1 blocks
+==14959==   total heap usage: 658,550 allocs, 658,549 frees, 19,073,784 bytes allocated
+==14959== 
+==14959== 12 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==14959==    at 0x402A6DC: operator new(unsigned int) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+==14959==    by 0x804CC38: List<RGBAPixel>::insertBack(RGBAPixel const&) (list.cpp:81)
+==14959==    by 0x80497B1: imageToList(PNG const&, bool) (main.cpp:21)
+==14959==    by 0x8049D79: testReverse() (main.cpp:88)
+==14959==    by 0x804C884: main (main.cpp:333)
+==14959== 
+==14959== LEAK SUMMARY:
+==14959==    definitely lost: 12 bytes in 1 blocks
+==14959==    indirectly lost: 0 bytes in 0 blocks
+==14959==      possibly lost: 0 bytes in 0 blocks
+==14959==    still reachable: 0 bytes in 0 blocks
+==14959==         suppressed: 0 bytes in 0 blocks
+==14959== 
+==14959== For counts of detected and suppressed errors, rerun with: -v
+==14959== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ ./mp3test reverse && eog reverse.png soln_reverse.png
+[main]: testReverse()
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+~/CS225/UIUC-CS225/mp3 $ ./mp3test reverse && eog reverse.png 
+[main]: testReverse()
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+~/CS225/UIUC-CS225/mp3 $ make && ./mp3test reverse && eog reverse.png soln_reverse.png
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+[main]: testReverse()
+[main]: testReverseNth()
+[testReverseNth]: Image does not match soln_reverseNth_01.png
+[testReverseNth]: Image does not match soln_reverseNth_02.png
+~/CS225/UIUC-CS225/mp3 $ diff reverse.png soln_reverse.png
+~/CS225/UIUC-CS225/mp3 $ make && ./mp3test reverse

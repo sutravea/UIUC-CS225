@@ -103,7 +103,7 @@ void List<T>::insertBack( const T & ndata )
 template <class T>
 void List<T>::reverse()
 {
-    reverse(head, head->next);
+    reverse(head, tail);
 }
 
 /**
@@ -127,16 +127,18 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
         ListNode * original = endPoint;
         ListNode * prevNode = NULL;
         ListNode * endNext = endPoint->next;
- 
-        while (original != startPoint->prev)
+        ListNode * myEndPoint = endPoint;
+        ListNode * startPrev = startPoint->prev;
+
+        while (original != startPrev)
         {
             ListNode * node = new ListNode(original->data);
 
-            if (original == endPoint)
+            if (original == myEndPoint)
             {
-                node->prev = startPoint->prev;
-                if (startPoint->prev != NULL)
-                    startPoint->prev->next = node;
+                node->prev = startPrev;
+                if (startPrev != NULL)
+                    startPrev->next = node;
                 else
                     head = node;
             }
@@ -151,7 +153,7 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
 
             ListNode * temp = original;
             original = original->prev;
-            if (temp != NULL && temp != endPoint)
+            if (temp != NULL && temp != myEndPoint)
             {
                 delete temp;
                 temp = NULL;
@@ -168,23 +170,26 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
         }
         
         else
-            prevNode = tail;
-
-
-        while(prevNode != NULL)
         {
-            cout << prevNode->data << " ";
-            prevNode = prevNode->prev;
+            delete tail;
+            tail = prevNode;
         }
 
-        cout << endl;
+        // ListNode * test = tail;
+        // while(test != NULL)
+        // {
+        //     cout << test->data << " ";
+        //     test = test->prev;
+        // }
 
-        prevNode = head;
-        while(prevNode != NULL)
-        {
-            cout << prevNode->data << " ";
-            prevNode = prevNode->next;
-        }
+        // cout << endl;
+
+        // test = head;
+        // while(test != NULL)
+        // {
+        //     cout << head->data << " ";
+        //     test = test->next;
+        // }
         
     }
 }
@@ -198,7 +203,23 @@ void List<T>::reverse( ListNode * & startPoint, ListNode * & endPoint )
 template <class T>
 void List<T>::reverseNth( int n )
 {
-    /// @todo Graded in MP3.1
+    if(n >= length)
+        reverse(head, tail);
+
+    ListNode * endPt = head;
+    ListNode * startPt = endPt;
+    for(int i = 0; i < length; i+= n)
+    {
+        if (i != 0)
+            startPt = endPt->next;
+        for (int j = 1; j < n; j++)
+        {
+            if (endPt->next != NULL)
+                endPt = endPt->next;
+        }
+        cout << "Reversing " << startPt->data << " " << endPt->data << endl;
+        reverse(startPt, endPt);
+    }
 }
 
 

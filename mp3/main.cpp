@@ -83,48 +83,62 @@ void testInserts()
 void testReverse()
 {
 	cout << "[main]: " << __func__ << "()" << endl;
-	// PNG in("in_02.png");
+	PNG in("in_02.png");
 
-	// List<RGBAPixel> list = imageToList(in);
-	// list.reverse();
+	List<RGBAPixel> list = imageToList(in);
+	list.reverse();
 
-	// PNG out = listToImage(list, in.width(), in.height());
-	// out.writeToFile("reverse.png");
+	PNG out = listToImage(list, in.width(), in.height());
+	out.writeToFile("reverse.png");
 
-	// checkSoln(__func__, out, "soln_reverse.png");
+	checkSoln(__func__, out, "soln_reverse.png");
 
-        List<int> list;
+        List<int> testList;
 
 	for (int i = 1; i <= 10; i++)
-		list.insertBack(i);
+		testList.insertBack(i);
         
-	cout << "original list: " << list << endl;
+	cout << "original testList: " << testList << endl;
         
-        list.reverse();
+        testList.reverse();
         
-        cout << "reversed list: " << list << endl;
+        cout << "reversed testList: " << testList << endl;
+
+
 }
 
 void testReverseNth()
 {
 	cout << "[main]: " << __func__ << "()" << endl;
-	PNG in("in_03.png");
+	// PNG in("in_03.png");
 	
-	List<RGBAPixel> list = imageToList(in);
-	list.reverseNth(in.height() * 20);
+	// List<RGBAPixel> list = imageToList(in);
+	// list.reverseNth(in.height() * 20);
 
-	PNG out = listToImage(list, in.width(), in.height());
-	out.writeToFile("reverseNth_01.png");
+	// PNG out = listToImage(list, in.width(), in.height());
+	// out.writeToFile("reverseNth_01.png");
 
-	checkSoln(__func__, out, "soln_reverseNth_01.png");
+	// checkSoln(__func__, out, "soln_reverseNth_01.png");
 
-	in.readFromFile("in_04.png");
-	list = imageToList(in);
-	list.reverseNth(in.height() * 61);
-	out = listToImage(list, in.width(), in.height());
-	out.writeToFile("reverseNth_02.png");
+	// in.readFromFile("in_04.png");
+	// list = imageToList(in);
+	// list.reverseNth(in.height() * 61);
+	// out = listToImage(list, in.width(), in.height());
+	// out.writeToFile("reverseNth_02.png");
 
-	checkSoln(__func__, out, "soln_reverseNth_02.png");
+	// checkSoln(__func__, out, "soln_reverseNth_02.png");
+
+        // List<int> list;
+
+	// for (int i = 1; i <= 10; i++)
+	// 	list.insertBack(i);
+        
+	// cout << "original list: " << list << endl;
+        
+        // list.reverseNth(3);
+        
+        // cout << "reversed list: " << list << endl;
+
 }
 
 
