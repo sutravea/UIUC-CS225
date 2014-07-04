@@ -192,86 +192,106 @@ void testSplit()
 
         cout << "split testList: " << testList2 << endl;
 
-	// PNG in("in_07.png");
-	// List<RGBAPixel> list1;
-	// for (int i = 0; i < in.width(); i++)
-	// 	for (int j = 0; j < in.height(); j++)
-	// 		list1.insertBack(*in(i,j));
-	// List<RGBAPixel> list2 = list1.split(400*240);
-	// List<RGBAPixel> list3 = list2.split(400*240);
+	PNG in("in_07.png");
+	List<RGBAPixel> list1;
+	for (int i = 0; i < in.width(); i++)
+		for (int j = 0; j < in.height(); j++)
+			list1.insertBack(*in(i,j));
+	List<RGBAPixel> list2 = list1.split(400*240);
+	List<RGBAPixel> list3 = list2.split(400*240);
 
-	// vector<RGBAPixel> im1vect(list1.begin(), list1.end());
-	// vector<RGBAPixel> im2vect(list2.begin(), list2.end());
-	// vector<RGBAPixel> im3vect(list3.begin(), list3.end());
+	vector<RGBAPixel> im1vect(list1.begin(), list1.end());
+	vector<RGBAPixel> im2vect(list2.begin(), list2.end());
+	vector<RGBAPixel> im3vect(list3.begin(), list3.end());
 
-	// PNG out1(400,240);
-	// int x = 0;
-	// for (int i = 0; i < im1vect.size(); i++)
-	// {
-	// 	int y = i % 240;
-	// 	*out1(x,y) = im1vect[i];
-	// 	if (y == 239)
-	// 		x++;
-	// }
-	// out1.writeToFile("split_01.png");
-	// checkSoln(__func__, out1, "soln_split_01.png");
+	PNG out1(400,240);
+	int x = 0;
+	for (int i = 0; i < im1vect.size(); i++)
+	{
+		int y = i % 240;
+		*out1(x,y) = im1vect[i];
+		if (y == 239)
+			x++;
+	}
+	out1.writeToFile("split_01.png");
+	checkSoln(__func__, out1, "soln_split_01.png");
 
-	// PNG out2(400,240);
-	// x = 0;
-	// for (int i = 0; i < im2vect.size(); i++)
-	// {
-	// 	int y = i % 240;
-	// 	*out2(x,y) = im2vect[i];
-	// 	if (y == 239)
-	// 		x++;
-	// }
-	// out2.writeToFile("split_02.png");
-	// checkSoln(__func__, out2, "soln_split_02.png");
+	PNG out2(400,240);
+	x = 0;
+	for (int i = 0; i < im2vect.size(); i++)
+	{
+		int y = i % 240;
+		*out2(x,y) = im2vect[i];
+		if (y == 239)
+			x++;
+	}
+	out2.writeToFile("split_02.png");
+	checkSoln(__func__, out2, "soln_split_02.png");
 
-	// PNG out3(400,240);
-	// x = 0;
-	// for (int i = 0; i < im3vect.size(); i++)
-	// {
-	// 	int y = i % 240;
-	// 	*out3(x,y) = im3vect[i];
-	// 	if (y == 239)
-	// 		x++;
-	// }
-	// out3.writeToFile("split_03.png");
-	// checkSoln(__func__, out3, "soln_split_03.png");
+	PNG out3(400,240);
+	x = 0;
+	for (int i = 0; i < im3vect.size(); i++)
+	{
+		int y = i % 240;
+		*out3(x,y) = im3vect[i];
+		if (y == 239)
+			x++;
+	}
+	out3.writeToFile("split_03.png");
+	checkSoln(__func__, out3, "soln_split_03.png");
 }
 
 void testMerge()
 {
 	cout << "[main]: " << __func__ << "()" << endl;
 
-	PNG im1("in_08.png");
-	PNG im2("in_09.png");
-	PNG out(600, 400);
+	// PNG im1("in_08.png");
+	// PNG im2("in_09.png");
+	// PNG out(600, 400);
 
-	vector<RGBAPixel> v1;
-	for (int i = 0; i < im1.width(); i++)
-		for (int j = 0; j < im1.height(); j++)
-			v1.push_back(*im1(i,j));
-	vector<RGBAPixel> v2;
-	for (int i = 0; i < im2.width(); i++)
-		for (int j = 0; j < im2.height(); j++)
-			v2.push_back(*im2(i,j));
-	List<RGBAPixel> l1(v1.begin(), v1.end());
-	List<RGBAPixel> l2(v2.begin(), v2.end());
-	l1.mergeWith(l2);
-	vector<RGBAPixel> merged(l1.begin(), l1.end());
-	int x = 0;
-	for (int i = 0; i < merged.size(); i++)
-	{
-		int y = i % 400;
-		*out(x,y) = merged[i];
-		if (y == 399)
-			x++;
-	}
-	out.writeToFile("merge.png");
+	// vector<RGBAPixel> v1;
+	// for (int i = 0; i < im1.width(); i++)
+	// 	for (int j = 0; j < im1.height(); j++)
+	// 		v1.push_back(*im1(i,j));
+	// vector<RGBAPixel> v2;
+	// for (int i = 0; i < im2.width(); i++)
+	// 	for (int j = 0; j < im2.height(); j++)
+	// 		v2.push_back(*im2(i,j));
+	// List<RGBAPixel> l1(v1.begin(), v1.end());
+	// List<RGBAPixel> l2(v2.begin(), v2.end());
+	// l1.mergeWith(l2);
+	// vector<RGBAPixel> merged(l1.begin(), l1.end());
+	// int x = 0;
+	// for (int i = 0; i < merged.size(); i++)
+	// {
+	// 	int y = i % 400;
+	// 	*out(x,y) = merged[i];
+	// 	if (y == 399)
+	// 		x++;
+	// }
+	// out.writeToFile("merge.png");
 
-	checkSoln(__func__, out, "soln_merge.png");
+	// checkSoln(__func__, out, "soln_merge.png");
+
+        List<int> testList1;
+        List<int> testList2;
+
+	for (int i = 1; i <= 10; i+=2)
+        {
+            testList1.insertBack(i);
+        }
+
+	for (int i = 2; i <= 20; i+=2)
+        {
+            testList2.insertBack(i);
+        }
+	cout << "original testList1: " << testList1 << endl;
+        cout << "original testList2: " << testList2 << endl;
+        
+        testList1.mergeWith(testList2);
+        cout << "merged testList: " << testList1 << endl;
+
+
 }
 
 inline vector<int> buildVector(BlockPNG const & b, int d)

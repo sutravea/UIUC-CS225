@@ -376,8 +376,49 @@ void List<T>::mergeWith(List<T> & otherList)
 template <class T>
 typename List<T>::ListNode * List<T>::merge(ListNode * first, ListNode * second)
 {
-    /// @todo Graded in MP3.2
-    return NULL; // change me!
+    ListNode * startPtr = first->data < second->data? first : second;
+    ListNode * temp = NULL;
+
+    while (first != NULL && second != NULL)
+    {
+        
+        if (first->data < second->data)
+        {
+            temp = first->next;
+            first->next = second;
+            second->prev = first;
+            // cout << first->data << " ";
+            first = temp;
+        }
+        else
+        {
+            temp = second->next;
+            second->next = first;
+            first->prev = second;
+            // cout << second->data << " ";
+            second = temp;
+        }
+    }
+
+    
+    // if (first == NULL)
+    // {
+    //     while (second != NULL)
+    //     {
+    //         cout << second->data << " ";
+    //         second = second->next;
+    //     }
+    // }
+    // if (second == NULL)
+    // {
+    //     while (first != NULL)
+    //     {
+    //         cout << first->data << " ";
+    //         first = first->next;
+    //     }
+    // }
+            
+    return startPtr ;
 }
 
 /**

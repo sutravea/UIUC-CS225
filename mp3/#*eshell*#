@@ -63095,3 +63095,200 @@ split testList: < 1 >
 ~/CS225/UIUC-CS225/mp3 $ make && valgrind --leak-check=full ./mp3test split
 g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
 g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+==20183== Memcheck, a memory error detector
+==20183== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==20183== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==20183== Command: ./mp3test split
+==20183== 
+[main]: testSplit()
+original testList: < 1 2 3 4 5 6 7 >
+split testList: < 4 5 6 7 >
+==20183== 
+==20183== HEAP SUMMARY:
+==20183==     in use at exit: 0 bytes in 0 blocks
+==20183==   total heap usage: 14 allocs, 14 frees, 180 bytes allocated
+==20183== 
+==20183== All heap blocks were freed -- no leaks are possible
+==20183== 
+==20183== For counts of detected and suppressed errors, rerun with: -v
+==20183== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+~/CS225/UIUC-CS225/mp3 $ git add -A
+~/CS225/UIUC-CS225/mp3 $ git commit -m "finished working on and testing split helper function. need to work on mergesort helper function."
+[master ebacadf] finished working on and testing split helper function. need to work on mergesort helper function.
+ 7 files changed, 63374 insertions(+), 66 deletions(-)
+ create mode 100644 mp3/*eshell*~
+ rewrite mp3/main.o (87%)
+ rewrite mp3/mp3test (86%)
+~/CS225/UIUC-CS225/mp3 $ git push
+Counting objects: 17, done.
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 130.36 KiB | 0 bytes/s, done.
+Total 9 (delta 7), reused 0 (delta 0)
+To git@github.com:sutravea/UIUC-CS225.git
+   9cdf9d8..ebacadf  master -> master
+~/CS225/UIUC-CS225/mp3 $ ./mp3test reverse && eog split_01.png split_02.png split_03.png  soln_split_01.png soln_split_02.png soln_split_03.png 
+[main]: testReverse()
+[testReverse]: Image does not match soln_reverse.png
+original testList: < 1 2 3 4 5 6 7 8 9 10 >
+reversed testList: < 3 2 1 4 5 6 7 8 9 10 >
+[main]: testReverseNth()
+Reversing (245,191,149) (90,43,54)
+Reversing (242,187,147) (108,51,64)
+Reversing (243,184,144) (99,57,62)
+Reversing (239,181,139) (114,58,69)
+Reversing (246,188,145) (80,38,52)
+Reversing (246,187,144) (79,38,52)
+Reversing (239,179,140) (87,47,60)
+Reversing (238,179,139) (78,43,55)
+Reversing (242,184,144) (77,35,52)
+Reversing (206,156,124) (68,28,39)
+Reversing (226,173,136) (62,20,29)
+Reversing (243,183,147) (63,20,31)
+Reversing (219,175,140) (63,21,33)
+Reversing (161,115,82) (67,25,37)
+Reversing (250,197,155) (74,30,43)
+Reversing (252,195,158) (93,43,56)
+Reversing (251,200,158) (87,47,54)
+Reversing (250,202,161) (75,42,51)
+Reversing (251,206,164) (84,49,56)
+Reversing (251,206,164) (85,42,55)
+Reversing (251,207,163) (120,72,72)
+Reversing (251,206,164) (168,138,132)
+Reversing (251,206,164) (29,21,26)
+Reversing (249,202,160) (30,21,26)
+Reversing (93,100,126) (34,58,86)
+Reversing (143,155,169) (55,89,127)
+Reversing (203,210,224) (128,196,204)
+Reversing (237,240,245) (254,255,247)
+Reversing (206,216,226) (254,255,250)
+Reversing (141,147,160) (255,255,255)
+Reversing (129,135,154) (117,192,188)
+Reversing (96,108,124) (56,84,108)
+original testList: < 1 2 >
+Reversing 1 1
+Reversing 2 2
+reversed testList: < 1 2 >
+~/CS225/UIUC-CS225/mp3 $ ./mp3test split && eog split_01.png split_02.png split_03.png  soln_split_01.png soln_split_02.png soln_split_03.png ng  
+[main]: testSplit()
+original testList: < 1 2 3 4 5 6 7 >
+split testList: < 4 5 6 7 >
+~/CS225/UIUC-CS225/mp3 $ ls
+#*eshell*#             in_05.png       png.cpp                 soln_split_01.png
+*eshell*               in_06.png       png.h                   soln_split_02.png
+*eshell*~              in_07.png       png.o                   soln_split_03.png
+Makefile               in_08.png       reverse.png             soln_waterfall_01.png
+blockpng.cpp           in_09.png       reverseNth_01.png       soln_waterfall_02.png
+blockpng.h             list.cpp        reverseNth_02.png       split_01.png
+blockpng.o             list.h          rgbapixel.cpp           split_02.png
+in_01.png              list_given.cpp  rgbapixel.h             split_03.png
+in_01_shuffled_1.png   list_given.h    rgbapixel.o             unshuffled_1.png
+in_01_shuffled_60.png  main.cpp        soln_merge.png          unshuffled_60.png
+in_02.png              main.o          soln_reverse.png        waterfall_01.png
+in_03.png              merge.png       soln_reverseNth_01.png  waterfall_02.png
+in_04.png              mp3test         soln_reverseNth_02.png  
+~/CS225/UIUC-CS225/mp3 $ ./mp3test split && eog split_01.png split_02.png split_03.png  soln_split_01.png soln_split_02.png soln_split_03.png ng  
+[main]: testSplit()
+original testList: < 1 2 3 4 5 6 7 >
+split testList: < 4 5 6 7 >
+~/CS225/UIUC-CS225/mp3 $ ./mp3test split && eog split_01.png split_02.png split_03.png  soln_split_01.png soln_split_02.png soln_split_03.png ng  
+[main]: testSplit()
+original testList: < 1 2 3 4 5 6 7 >
+split testList: < 4 5 6 7 >
+~/CS225/UIUC-CS225/mp3 $ ./mp3test split && eog split_01.png split_02.png split_03.png  soln_split_01.png soln_split_02.png soln_split_03.png ng  
+[main]: testSplit()
+original testList: < 1 2 3 4 5 6 7 >
+split testList: < 4 5 6 7 >
+~/CS225/UIUC-CS225/mp3 $ make && ./mp3test split && eog split_01.png split_02.png split_03.png  soln_split_01.png soln_split_02.png soln_split_03.png ng  
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+[main]: testSplit()
+original testList: < 1 2 3 4 5 6 7 >
+split testList: < 4 5 6 7 >
+~/CS225/UIUC-CS225/mp3 $ make && ./mp3test split && eog split_01.png split_02.png split_03.png  soln_split_01.png soln_split_02.png soln_split_03.png ng  
+make: Nothing to be done for `all'.
+[main]: testSplit()
+original testList: < 1 2 3 4 5 6 7 >
+split testList: < 4 5 6 7 >
+~/CS225/UIUC-CS225/mp3 $ ./mp3test merge
+[main]: testMerge()
+[testMerge]: Image does not match soln_merge.png
+~/CS225/UIUC-CS225/mp3 $ eog merge.png 
+~/CS225/UIUC-CS225/mp3 $ 
+~/CS225/UIUC-CS225/mp3 $ make && ./mp3test split && eog split_01.png split_02.png split_03.png  soln_split_01.png soln_split_02.png soln_split_03.png ng  
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+In file included from list.h:302:0,
+                 from main.cpp:1:
+list.cpp: In member function ‘List<T>::ListNode* List<T>::merge(List<T>::ListNode*, List<T>::ListNode*)’:
+list.cpp:406:12: error: ‘startPtr’ was not declared in this scope
+     return startPtr;
+            ^
+compilation terminated due to -Wfatal-errors.
+make: *** [main.o] Error 1
+~/CS225/UIUC-CS225/mp3 $ make
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+main.cpp: In function ‘void testMerge()’:
+main.cpp:284:36: error: ‘testList’ was not declared in this scope
+  cout << "original testList1: " << testList << endl;
+                                    ^
+compilation terminated due to -Wfatal-errors.
+make: *** [main.o] Error 1
+~/CS225/UIUC-CS225/mp3 $ make
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+main.cpp: In function ‘void testMerge()’:
+main.cpp:287:65: error: no matching function for call to ‘List<int>::merge(List<int>&)’
+         cout << "merged testList: " << testList1.merge(testList2) << endl;
+                                                                 ^
+compilation terminated due to -Wfatal-errors.
+make: *** [main.o] Error 1
+~/CS225/UIUC-CS225/mp3 $ make
+~/CS225/UIUC-CS225/mp3 $ make
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+main.cpp: In function ‘void testMerge()’:
+main.cpp:287:65: error: no matching function for call to ‘List<int>::merge(List<int>&)’
+         cout << "merged testList: " << testList1.merge(testList2) << endl;
+                                                                 ^
+compilation terminated due to -Wfatal-errors.
+make: *** [main.o] Error 1
+~/CS225/UIUC-CS225/mp3 $ make
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+main.cpp: In function ‘void testMerge()’:
+main.cpp:287:37: error: no match for ‘operator<<’ (operand types are ‘std::basic_ostream<char>’ and ‘void’)
+         cout << "merged testList: " << testList1.mergeWith(testList2) << endl;
+                                     ^
+compilation terminated due to -Wfatal-errors.
+make: *** [main.o] Error 1
+~/CS225/UIUC-CS225/mp3 $ make
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+main.cpp: In function ‘void testMerge()’:
+main.cpp:287:61: error: conversion from ‘void’ to non-scalar type ‘List<int>’ requested
+         List<int> mergedList = testList1.mergeWith(testList2);
+                                                             ^
+compilation terminated due to -Wfatal-errors.
+make: *** [main.o] Error 1
+~/CS225/UIUC-CS225/mp3 $ make
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+In file included from list.h:302:0,
+                 from main.cpp:1:
+list.cpp: In instantiation of ‘List<T>::ListNode* List<T>::merge(List<T>::ListNode*, List<T>::ListNode*) [with T = int]’:
+list.cpp:348:38:   required from ‘void List<T>::mergeWith(List<T>&) [with T = int]’
+main.cpp:287:38:   required from here
+list.cpp:384:24: error: request for member ‘data’ in ‘second’, which is of pointer type ‘List<int>::ListNode*’ (maybe you meant to use ‘->’ ?)
+         if (first.data < second.data)
+                        ^
+compilation terminated due to -Wfatal-errors.
+make: *** [main.o] Error 1
+~/CS225/UIUC-CS225/mp3 $ make
+g++ -c -g -O0 -Wfatal-errors -Werror -Wchar-subscripts -Wparentheses -Wreturn-type -Wmissing-braces -Wundef -Wshadow main.cpp
+g++ main.o png.o rgbapixel.o blockpng.o -lpng -o mp3test
+~/CS225/UIUC-CS225/mp3 $ ./mp3test merge
+[main]: testMerge()
+interrupt
+~/CS225/UIUC-CS225/mp3 $ 
+~/CS225/UIUC-CS225/mp3 $ valgrind --leak-check=full ./mp3test merge
+==20348== Memcheck, a memory error detector
+==20348== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==20348== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==20348== Command: ./mp3test merge
+==20348== 
+[main]: testMerge()
