@@ -378,25 +378,47 @@ typename List<T>::ListNode * List<T>::merge(ListNode * first, ListNode * second)
 {
     ListNode * startPtr = first->data < second->data? first : second;
     ListNode * temp = NULL;
-
+    bool firstFlag;
     while (first != NULL && second != NULL)
     {
+        //temp = first->data <= second->data? first->next : second->next;
         
         if (first->data < second->data)
         {
             temp = first->next;
             first->next = second;
             second->prev = first;
-            // cout << first->data << " ";
+            cout << first->data << " ";
             first = temp;
+            firstFlag = true;
         }
-        else
+        else if (second->data < first->data)
         {
             temp = second->next;
             second->next = first;
             first->prev = second;
-            // cout << second->data << " ";
+            cout << second->data << " ";
             second = temp;
+            firstFlag = false;
+        }
+        else
+        {
+            if(firstFlag)
+            {
+                temp = second->next;
+                second->next = first;
+                first->prev = second;
+                cout << second->data << " ";
+                second = temp;
+            }
+            else
+            {
+                temp = first->next;
+                first->next = second;
+                second->prev = first;
+                cout << first->data << " ";
+                first = temp;
+            }
         }
     }
 

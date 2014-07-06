@@ -250,16 +250,35 @@ void testMerge()
 	// PNG out(600, 400);
 
 	// vector<RGBAPixel> v1;
-	// for (int i = 0; i < im1.width(); i++)
-	// 	for (int j = 0; j < im1.height(); j++)
+	// for (int i = 0; i < 2; i++)
+	// 	for (int j = 0; j < 2; j++)
 	// 		v1.push_back(*im1(i,j));
+
 	// vector<RGBAPixel> v2;
-	// for (int i = 0; i < im2.width(); i++)
-	// 	for (int j = 0; j < im2.height(); j++)
+	// for (int i = 0; i < 3; i++)
+	// 	for (int j = 0; j < 3; j++) 
 	// 		v2.push_back(*im2(i,j));
+
+	// // for (int i = 0; i < im1.width(); i++)
+	// // 	for (int j = 0; j < im1.height(); j++)
+	// // 		v1.push_back(*im1(i,j));
+
+	// // vector<RGBAPixel> v2;
+	// // for (int i = 0; i < im2.width(); i++)
+	// // 	for (int j = 0; j < im2.height(); j++)
+	// // 		v2.push_back(*im2(i,j));
+
+
 	// List<RGBAPixel> l1(v1.begin(), v1.end());
 	// List<RGBAPixel> l2(v2.begin(), v2.end());
-	// l1.mergeWith(l2);
+
+        
+        // cout << l1 << endl;
+        // cout << l2 << endl;
+	// l2.mergeWith(l1);
+        // cout << l1 << endl;
+        // cout << l2 << endl;
+
 	// vector<RGBAPixel> merged(l1.begin(), l1.end());
 	// int x = 0;
 	// for (int i = 0; i < merged.size(); i++)
@@ -271,13 +290,19 @@ void testMerge()
 	// }
 	// out.writeToFile("merge.png");
 
-	// checkSoln(__func__, out, "soln_merge.png");
-
+        // checkSoln(__func__, out, "soln_merge.png");
+        
         List<int> testList1;
         List<int> testList2;
 
-	for (int i = 1; i <= 10; i+=2)
+	for (int i = 1; i <= 20; i+=2)
         {
+            if (i == 9)
+            {
+                testList1.insertBack(9);   
+                testList1.insertBack(9);
+            }
+            else
             testList1.insertBack(i);
         }
 
@@ -288,8 +313,9 @@ void testMerge()
 	cout << "original testList1: " << testList1 << endl;
         cout << "original testList2: " << testList2 << endl;
         
-        testList1.mergeWith(testList2);
+        testList2.mergeWith(testList1);
         cout << "merged testList: " << testList1 << endl;
+        cout << "merged testList: " << testList2 << endl;
 
 
 }
