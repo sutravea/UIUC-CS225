@@ -376,69 +376,79 @@ void List<T>::mergeWith(List<T> & otherList)
 template <class T>
 typename List<T>::ListNode * List<T>::merge(ListNode * first, ListNode * second)
 {
-    ListNode * startPtr = first->data < second->data? first : second;
+    if (first == NULL)
+        return second;
+    if (second == NULL)
+        return first;
+    ListNode * startPtr = NULL;
+    if (first->data < second->data)
+    {
+        startPtr = first;
+        first = first->next;
+    }
+    else
+    {
+        startPtr = second;
+        second = second->next;
+    }
     ListNode * temp = NULL;
-    bool firstFlag;
+    ListNode * mergeTail = startPtr;
+
     while (first != NULL && second != NULL)
     {
-        //temp = first->data <= second->data? first->next : second->next;
         
         if (first->data < second->data)
         {
-            temp = first->next;
-            first->next = second;
-            second->prev = first;
-            cout << first->data << " ";
-            first = temp;
-            firstFlag = true;
+            //cout << first->data << " ";
+            first->prev = mergeTail;
+            mergeTail->next = first;
+            first = first->next;
         }
-        else if (second->data < first->data)
+        else// if (second->data < first->data)
         {
-            temp = second->next;
-            second->next = first;
-            first->prev = second;
-            cout << second->data << " ";
-            second = temp;
-            firstFlag = false;
+            //cout << second->data << " ";
+            second->prev = mergeTail;
+            mergeTail->next = second;
+            second = second->next;
+
         }
-        else
-        {
-            if(firstFlag)
-            {
-                temp = second->next;
-                second->next = first;
-                first->prev = second;
-                cout << second->data << " ";
-                second = temp;
-            }
-            else
-            {
-                temp = first->next;
-                first->next = second;
-                second->prev = first;
-                cout << first->data << " ";
-                first = temp;
-            }
-        }
+
+        // else
+        // {
+        //     if(first == mergeTail)
+        //     {
+        //         cout << first->data << " ";
+        //         first = first->next;
+        //         mergeTail->next = second;
+        //         second->prev = mergeTail;
+        //         second = second->next;
+        //         //mergeTail = mergeTail->next;
+        //     }
+        //     else
+        //     {
+        //         cout << second->data << " ";
+        //         second = second->next;
+        //         mergeTail->next = first;
+        //         first->prev = mergeTail;
+        //         first = first->next;
+        //         //mergeTail = mergeTail->next;
+        //     }
+        // }
+
+        mergeTail = mergeTail->next;
     }
 
     
-    // if (first == NULL)
-    // {
-    //     while (second != NULL)
-    //     {
-    //         cout << second->data << " ";
-    //         second = second->next;
-    //     }
-    // }
-    // if (second == NULL)
-    // {
-    //     while (first != NULL)
-    //     {
-    //         cout << first->data << " ";
-    //         first = first->next;
-    //     }
-    // }
+    if (first == NULL)
+    {
+        second->prev = mergeTail;
+        mergeTail->next = second;
+    }
+    if (second == NULL)
+    {
+        first->prev = mergeTail;
+        mergeTail->next = first;
+    }
             
     return startPtr ;
 }
