@@ -281,8 +281,8 @@ void testMerge()
 
         checkSoln(__func__, out, "soln_merge.png");
         
-        // List<int> testList1;
-        // List<int> testList2;
+        List<int> testList1;
+        List<int> testList2;
 
 	// // for (int i = 1; i <= 20; i+=2)
         // // {
@@ -300,8 +300,8 @@ void testMerge()
         // //     testList2.insertBack(i);
         // // }
 
-        
-        // testList1.insertBack(3);
+        testList1.insertBack(4);        
+        testList2.insertBack(9);
 
 
         // testList2.insertBack(3);
@@ -309,16 +309,16 @@ void testMerge()
 
 
 
-	// cout << "original testList1: " << testList1 << endl;
-        // cout << "original testList2: " << testList2 << endl;
+	cout << "original testList1: " << testList1 << endl;
+        cout << "original testList2: " << testList2 << endl;
         
-        // testList2.mergeWith(testList1);
-        // // testList1.mergeWith(testList2);
+        //testList2.mergeWith(testList1);
+        testList1.mergeWith(testList2);
 
-        // cout << endl;
+        cout << endl;
 
-        // cout << "merged testList: " << testList1 << endl;
-        // cout << "merged testList: " << testList2 << endl;
+        cout << "merged testList: " << testList1 << endl;
+        cout << "merged testList: " << testList2 << endl;
 
 
 }
@@ -335,53 +335,69 @@ inline vector<int> buildVector(BlockPNG const & b, int d)
 void testSort()
 {
 	cout << "[main]: " << __func__ << "()" << endl;
+	// List<int> list;
 
-	srand(225);
+        // list.insertBack(1);
+        // list.insertBack(3);
+        // list.insertBack(9);
+        // list.insertBack(4);
+        // list.insertBack(2);
+        // // list.insertBack(8);
+        // // list.insertBack(5);
+        // // list.insertBack(9);
+        // // list.insertBack(0);
+        // // list.insertBack(2);
+        // // list.insertBack(7);
 
-	// read in image to be shuffled
-	BlockPNG b;
-	b.readFromFile("in_01.png");
+        // cout << "list: " << list << endl;
+        // list.sort(); 
+        // cout << "list: " << list << endl;
+        srand(225);
 
-	int d = 60;
-	vector<int> v = buildVector(b, d);
-	random_shuffle(v.begin(), v.end());
+        // read in image to be shuffled
+        BlockPNG b;
+        b.readFromFile("in_01.png");
 
-	// generate shuffled image (done for you already)
-	/*
-	   PNG b2 = b.genImg(v, d);
-	   b2.writeToFile("in_01_shuffled_60.png");
-	*/
+        int d = 60;
+        vector<int> v = buildVector(b, d);
+        random_shuffle(v.begin(), v.end());
 
-	// make list and sort it
-	List<int> img_srt(v.begin(), v.end());
-	img_srt.sort();
+        // generate shuffled image (done for you already)
+        /*
+           PNG b2 = b.genImg(v, d);
+           b2.writeToFile("in_01_shuffled_60.png");
+        */
 
-	// vectorize and rebuild image
-	vector<int> v2(img_srt.begin(), img_srt.end());
+        // make list and sort it
+        List<int> img_srt(v.begin(), v.end());
+        img_srt.sort();
 
-	PNG b3 = b.genImg(v2, d);
-	b3.writeToFile("unshuffled_60.png");
+        // vectorize and rebuild image
+        vector<int> v2(img_srt.begin(), img_srt.end());
 
-	checkSoln("testSort", b3, "in_01.png");
+        PNG b3 = b.genImg(v2, d);
+        b3.writeToFile("unshuffled_60.png");
 
-	d = 1;
-	v = buildVector(b, d);
-	random_shuffle(v.begin(), v.end());
+        checkSoln("testSort", b3, "in_01.png");
 
-	/*
-	   PNG q = b.genImg(v, d);
-	   q.writeToFile("in_01_shuffled_1.png");
+        d = 1;
+        v = buildVector(b, d);
+        random_shuffle(v.begin(), v.end());
+
+        /*
+           PNG q = b.genImg(v, d);
+           q.writeToFile("in_01_shuffled_1.png");
     */
 
-	List<int> q_srt(v.begin(), v.end());
-	q_srt.sort();
+        List<int> q_srt(v.begin(), v.end());
+        q_srt.sort();
 
-	v2 = vector<int>(q_srt.begin(), q_srt.end());
+        v2 = vector<int>(q_srt.begin(), q_srt.end());
 
-	b3 = b.genImg(v2, d);
-	b3.writeToFile("unshuffled_1.png");
+        b3 = b.genImg(v2, d);
+        b3.writeToFile("unshuffled_1.png");
 
-	checkSoln("testSort", b3, "in_01.png");
+        checkSoln("testSort", b3, "in_01.png");
 }
 
 void testMP31()

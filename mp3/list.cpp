@@ -399,41 +399,17 @@ typename List<T>::ListNode * List<T>::merge(ListNode * first, ListNode * second)
         
         if (first->data < second->data)
         {
-            //cout << first->data << " ";
             first->prev = mergeTail;
             mergeTail->next = first;
             first = first->next;
         }
-        else// if (second->data < first->data)
+        else
         {
-            //cout << second->data << " ";
             second->prev = mergeTail;
             mergeTail->next = second;
             second = second->next;
 
         }
-
-        // else
-        // {
-        //     if(first == mergeTail)
-        //     {
-        //         cout << first->data << " ";
-        //         first = first->next;
-        //         mergeTail->next = second;
-        //         second->prev = mergeTail;
-        //         second = second->next;
-        //         //mergeTail = mergeTail->next;
-        //     }
-        //     else
-        //     {
-        //         cout << second->data << " ";
-        //         second = second->next;
-        //         mergeTail->next = first;
-        //         first->prev = mergeTail;
-        //         first = first->next;
-        //         //mergeTail = mergeTail->next;
-        //     }
-        // }
 
         mergeTail = mergeTail->next;
     }
@@ -479,6 +455,33 @@ void List<T>::sort()
 template <class T>
 typename List<T>::ListNode * List<T>::mergesort(ListNode * start, int chainLength)
 {
-    /// @todo Graded in MP3.2
-    return NULL; // change me!
+    if (chainLength == 1)
+        return start;
+
+    ListNode * midPtr = split(start, chainLength/2);
+    
+    // cout << " chainLength: " << chainLength;
+    // cout << " start: " << start->data;
+    // cout << " midPtr: " << midPtr->data << endl;
+
+    start = mergesort(start, chainLength/2);
+    midPtr = mergesort(midPtr, chainLength/2 + chainLength%2);
+    
+    // ListNode * temp = start;
+    // while (temp != NULL)
+    // {
+    //     cout << temp->data << " ";
+    //     temp = temp->next;
+    // }
+    // cout << "|";
+    
+    // temp = midPtr;
+    // while (temp != NULL)
+    // {
+    //     cout << temp->data << " ";
+    //     temp = temp->next;
+    // }
+    // cout << endl;
+
+    return merge(start, midPtr);
 }

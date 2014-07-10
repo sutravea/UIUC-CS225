@@ -24,6 +24,7 @@ Shape::Shape()
 	/* Nothing.  See initialization list. */
 }
 
+
 Shape::Shape(const Vector2& pcenter, const RGBAPixel& pcolor)
 	: center_(pcenter), 
 	color_(pcolor)
