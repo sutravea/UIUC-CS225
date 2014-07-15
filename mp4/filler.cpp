@@ -144,5 +144,16 @@ animation filler::fill( PNG & img, int x, int y,
      */
     
     OrderingStructure <pair<int, int> > orderStruct;
+    orderStruct.add(make_pair(x, y));
+    pair<int, int> point = orderStruct.remove();
+    while( !orderStruct.isEmpty())
+    {
+        if (unProcessed && checkTolerance(img, x, y, tolerance))
+        {}
+    }
     return animation();
 }
+
+bool checkTolerance(PNG & img, int x, int y, int tolerance)
+{
+    RGBAPixel 
