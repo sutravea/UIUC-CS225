@@ -14,7 +14,8 @@ animation filler::dfs::fillSolid( PNG & img, int x, int y,
      * @todo Your code here! You should replace the following line with a
      *  correct call to fill with the correct colorPicker parameter.
      */
-    return animation();
+    solidColorPicker scp = solidColorPicker(fillColor);
+    return fill(img, x, y, scp, tolerance, frameFreq);
 }
 
 animation filler::dfs::fillGrid( PNG & img, int x, int y, 
@@ -141,5 +142,7 @@ animation filler::fill( PNG & img, int x, int y,
      *        have been checked. So if frameFreq is set to 1, a pixel should
      *        be filled every frame.
      */
+    
+    OrderingStructure <pair<int, int> > orderStruct;
     return animation();
 }
